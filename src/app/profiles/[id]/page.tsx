@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/card";
 import { competitorProfiles } from "@/data/competitor-matrix";
 
+export const instant = false;
+
 export default async function ProfilePage({
  params,
 }: {

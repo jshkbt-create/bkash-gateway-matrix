@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Search, Trash2 } from "lucide-react";
 import { CompetitorProfile } from "@/types/competitor";
@@ -35,20 +35,6 @@ export function CompetitorTable({ externalFilter, onFilterReset }: CompetitorTab
  const { profiles, deleteProfile, comparisonList, toggleComparison } = useProfileStore();
  const [query, setQuery] = useState("");
  const [filterPriority, setFilterPriority] = useState<string>("All");
-
- // Sync internal filter with external stat click
- useEffect(() => {
-   if (externalFilter && externalFilter !== "All") {
-     if (externalFilter === "Local") {
-       // "Local" is a custom stat filter, not a priority
-       // We can't map it 1:1 to priority, so we'll handle it in the filteredProfiles logic
-     } else {
-       setFilterPriority(externalFilter);
-     }
-   } else {
-     setFilterPriority("All");
-   }
- }, [externalFilter]);
 
  const priorities = ["All", "High", "Medium-High", "Medium", "Low"];
 

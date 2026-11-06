@@ -6,13 +6,14 @@ import { ProfileForm } from "@/components/profile-form";
 import { useProfileStore } from "@/hooks/use-profile-store";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { ProfileFormValues } from "@/lib/validation";
 
 export default function NewProfilePage() {
   const { t } = useI18n();
   const { addProfile } = useProfileStore();
   const router = useRouter();
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: ProfileFormValues) => {
     addProfile({ ...data, id: crypto.randomUUID() });
     router.push("/");
   };

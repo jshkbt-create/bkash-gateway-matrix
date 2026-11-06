@@ -24,7 +24,7 @@ export function CsvActions() {
       header: true,
       skipEmptyLines: true,
       complete: (results) => {
-        const imported = results.data.map((row: any, index: number) => ({
+        const imported = (results.data as Record<string, string>[]).map((row, index) => ({
           ...row,
           id: row.id || `imported-${index}-${Date.now()}`,
         })) as CompetitorProfile[];

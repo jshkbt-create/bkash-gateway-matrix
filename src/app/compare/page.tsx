@@ -2,14 +2,12 @@
 
 import { AppShell } from "@/components/app-shell";
 import { useProfileStore } from "@/hooks/use-profile-store";
-import { useI18n } from "@/i18n/provider";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { CompetitorProfile } from "@/types/competitor";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { X } from "lucide-react";
 
 export default function ComparePage() {
-  const { t } = useI18n();
   const { profiles, comparisonList, clearComparison } = useProfileStore();
   
   const selectedProfiles = profiles.filter(p => comparisonList.includes(p.id));
@@ -26,7 +24,7 @@ export default function ComparePage() {
     );
   }
 
-  const fields = [
+  const fields: { label: string; key: keyof CompetitorProfile }[] = [
     { label: "English Overview", key: "englishOverview" },
     { label: "Core Features", key: "coreFeatures" },
     { label: "Priority", key: "phase1Priority" },
@@ -66,7 +64,7 @@ export default function ComparePage() {
                   <TableCell className="font-medium">{field.label}</TableCell>
                   {selectedProfiles.map(p => (
                     <TableCell key={p.id} className="text-center text-sm">
-                      {(p as any)[field.key]}
+                      {String(p[field.key])}
                     </TableCell>
                   ))}
                 </TableRow>

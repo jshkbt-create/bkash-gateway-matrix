@@ -1,7 +1,15 @@
 "use client"
 
 import * as React from "react"
-import { useController, UseControllerOptions, Control } from "react-hook-form"
+import {
+  useController,
+  Control,
+  ControllerFieldState,
+  ControllerRenderProps,
+  FieldValues,
+  FieldPath,
+  UseFormStateReturn,
+} from "react-hook-form"
 import { cn } from "@/lib/utils"
 
 export const Form = ({
@@ -72,14 +80,18 @@ export const FormMessage = React.forwardRef<
 ))
 FormMessage.displayName = "FormMessage"
 
-export const FormField = <TFieldValues extends any, TName extends any>({
+export const FormField = <TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({
   control,
   name,
   render,
 }: {
   control: Control<TFieldValues>
   name: TName
-  render: (props: any) => React.ReactNode
+  render: (props: {
+    field: ControllerRenderProps<TFieldValues, TName>
+    fieldState: ControllerFieldState
+    formState: UseFormStateReturn<TFieldValues>
+  }) => React.ReactNode
 }) => {
   const { field, fieldState } = useController({
     name,
@@ -89,6 +101,6 @@ export const FormField = <TFieldValues extends any, TName extends any>({
   return render({
     field,
     fieldState,
-    formState: { errors: {} } // Simplified
+    formState: {} as UseFormStateReturn<TFieldValues>
   })
 }

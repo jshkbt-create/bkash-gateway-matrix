@@ -4,7 +4,6 @@ import { Banknote, Globe2, Layers3, ShieldCheck } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CompetitorProfile } from "@/types/competitor";
 import { useI18n } from "@/i18n/provider";
-import { Button } from "@/components/ui/button";
 
 interface DashboardStatsProps {
   profiles: CompetitorProfile[];
