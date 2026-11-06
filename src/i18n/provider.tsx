@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { en } from "./en";
 import { bn } from "./bn";
+import { useProfileStore } from "@/hooks/use-profile-store";
 
 type Language = "en" | "bn";
 
@@ -23,6 +24,10 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
  document.documentElement.lang = language === "en" ? "en" : "bn";
  document.documentElement.dir = "ltr";
  }, [language]);
+
+ useEffect(() => {
+ useProfileStore.persist.rehydrate();
+ }, []);
 
  return (
  <I18nContext.Provider value={{ language, setLanguage, t }}>

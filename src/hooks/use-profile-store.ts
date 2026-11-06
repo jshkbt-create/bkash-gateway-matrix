@@ -44,6 +44,7 @@ export const useProfileStore = create<ProfileState>()(
     }),
     {
       name: 'gateway-matrix-storage',
+      skipHydration: true,
     }
   )
 );
